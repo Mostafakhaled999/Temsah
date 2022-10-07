@@ -1,12 +1,13 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:temsah/assets_paths.dart';
 
-
 class VehicleScreen extends StatefulWidget {
   int vehicleIndex;
+
   VehicleScreen(this.vehicleIndex);
 
   @override
@@ -15,16 +16,20 @@ class VehicleScreen extends StatefulWidget {
 
 class _VehicleScreenState extends State<VehicleScreen> {
   int _focusedIndex = 0;
+
   void _onItemFocus(int index) {
-    print(700 / MediaQuery.of(context).size.width);
     setState(() {
       _focusedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true,title: Text(vehiclesList[widget.vehicleIndex]),),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(mainVehiclesPicsPathsList[widget.vehicleIndex]),
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -41,30 +46,29 @@ class _VehicleScreenState extends State<VehicleScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top:20),
+            padding: const EdgeInsets.only(top: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
                   flex: 2,
-                  child: OrientationBuilder(builder: (context, orientation){
+                  child: OrientationBuilder(builder: (context, orientation) {
                     return ScrollSnapList(
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           child: Hero(
-                            tag:'Temsah-Transition${widget.vehicleIndex}',
+                            tag: 'Temsah-Transition${widget.vehicleIndex}',
                             child: Image(
                               width: MediaQuery.of(context).size.width * 0.3,
-                              image: AssetImage(vehiclesList[index]),
+                              image:
+                                  AssetImage(mainVehiclesPicsPathsList[index]),
                               fit: BoxFit.contain,
                             ),
                           ),
-                          onTap: (){
-
-                          },
+                          onTap: () {},
                         );
                       },
-                      itemCount: vehiclesList.length,
+                      itemCount: mainVehiclesPicsPathsList.length,
                       dynamicItemSize: true,
                       onItemFocus: _onItemFocus,
                       itemSize: MediaQuery.of(context).size.width * 0.3,
@@ -72,12 +76,35 @@ class _VehicleScreenState extends State<VehicleScreen> {
                     );
                   }),
                 ),
-                Flexible(flex: 3,child:Container() )
+                Flexible(flex: 3, child: Container(child:  GridView.builder(
+                    itemCount: 7,
+
+                    gridDelegate:
+                    SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,mainAxisExtent:MediaQuery.of(context).size.height*0.9*0.3 ,crossAxisSpacing: 15,mainAxisSpacing: 15),
+                    itemBuilder: (BuildContext context, int index) {
+                      print( MediaQuery.of(context).size.height*0.75*0.5);
+                      return VehicleElementCard();
+                    }),))
               ],
             ),
           ),
+
         ],
       ),
     );
   }
 }
+
+class VehicleElementCard extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+       Image(image: AssetImage('assets/icons/car-engine.png'),width: 128,height: 128,),
+      AutoSizeText('Engine',style: TextStyle(fontSize: 30,color: Colors.white,),maxFontSize: 50,minFontSize: 10,)
+    ]);
+  }
+}
+

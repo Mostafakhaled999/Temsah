@@ -6,11 +6,11 @@ import 'package:temsah/models/performance_data.dart';
 import 'package:temsah/models/protection_level.dart';
 import 'package:temsah/models/weights.dart';
 
-
 class Vehicle {
   String name;
   String mainImagePath;
   String imagePaths;
+  int numberOfTechnicalSpecs;
   Engine engine;
   PerformanceData? performanceData;
   Dimensions dimensions;
@@ -18,18 +18,18 @@ class Vehicle {
   ProtectionLevel protectionLevel;
   InteriorAndExterior? interiorAndExterior;
   GeneralSpecs? generalSpecs;
-  Vehicle(
-      {required this.name,
-      required this.imagePaths,
-      required this.mainImagePath,
-      required this.engine,
-        required this.dimensions,
-        required this.weights,
-required this.protectionLevel,
-        this.interiorAndExterior,
-        this.performanceData,
-        this.generalSpecs,
 
-
-      });
+  Vehicle({
+    required this.name,
+    required this.imagePaths,
+    required this.mainImagePath,
+    required int this.numberOfTechnicalSpecs,
+    required this.engine,
+    required this.dimensions,
+    required this.weights,
+    required this.protectionLevel,
+    this.interiorAndExterior,
+    this.performanceData,
+    this.generalSpecs,
+  });
 }

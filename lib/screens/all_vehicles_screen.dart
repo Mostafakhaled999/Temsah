@@ -56,7 +56,7 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
                       tag:'Temsah-Transition$index',
                       child: Image(
                         width: MediaQuery.of(context).size.width * 0.52,
-                        image: AssetImage(vehiclesList[index]),
+                        image: AssetImage(mainVehiclesPicsPathsList[index]),
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -68,7 +68,7 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
                     },
                   );
                 },
-                itemCount: vehiclesList.length,
+                itemCount: mainVehiclesPicsPathsList.length,
                 dynamicItemSize: true,
                 onItemFocus: _onItemFocus,
                 itemSize: MediaQuery.of(context).size.width * 0.52,
@@ -91,7 +91,7 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
                         color: Colors.white,
                       )),
                   AutoSizeText(
-                    vehiclesList[_focusedIndex],
+                    mainVehiclesPicsPathsList[_focusedIndex],
                     style: TextStyle(color: Colors.white, fontSize: 50),
                     minFontSize: 30,
                   ),
