@@ -22,8 +22,19 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-<<<<<<< Updated upstream
     - assets/videos/intro_video.mp4
+    - assets/videos/bus_vip/bus_vip.mp4
+    - assets/videos/light_temsah/light_temsah_Final.mp4
+    - assets/videos/sherpa/Sherpa.mp4
+    - assets/videos/temsah1/temsah1.mp4
+    - assets/videos/temsah2/temsah2.mp4
+    - assets/videos/temsah3/temsah3.mp4
+    - assets/videos/temsah3_pickup/temsah3_pickup.mp4
+    - assets/videos/temsah4_new/temsah4_new.mp4
+    - assets/videos/temsah5/temsah5.mp4
+    - assets/videos/temsah6/temsah6.mp4
+    - assets/videos/temsah_bus/temsah-bus.mp4
+    - assets/videos/trailer/trailer-video.mp4
     - assets/images/logos/mogama3_logo.png
     - assets/images/logos/markabat_logo.png
     - assets/images/trailer/trailer.png
@@ -31,8 +42,8 @@ flutter:
     - assets/images/temsah2/temsah2.png
     - assets/images/temsah3/temsah3.png
     - assets/images/temsah4/temsah4.png
-    - assets/images/temsah_bus/temsah-bus.png
-    - assets/images/vip_armored_bus/bus.png
+    - assets/images/temsah-bus/temsah-bus.png
+    - assets/images/vip_armored_bus/temsah-vip.png
     - assets/images/light_temsah/light-temsah.png
     - assets/icons/axle.png
     - assets/icons/bandwidth.png
@@ -44,18 +55,4 @@ flutter:
     - assets/icons/monitor.png
     - assets/icons/shield.png
     - assets/icons/weight.png
-=======
-    - assets/intro_video.mp4
-    - assets/mogama3_logo.png
-    - assets/markabat_logo.png
-    - assets/trailer.png
-    - assets/temsah1.png
-    - assets/temsah2.png
-    - assets/temsah3.png
-    - assets/temsah4.png
-    - assets/temsah6.png
-    - assets/temsah-bus.png
-    - assets/bus.png
-    - assets/light-temsah.png
->>>>>>> Stashed changes
 

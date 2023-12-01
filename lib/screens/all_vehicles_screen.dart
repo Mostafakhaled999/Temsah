@@ -4,16 +4,24 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:temsah/assets_paths.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
+import 'package:temsah/data/vehicles-data.dart';
+import 'package:temsah/enums/languageEnum.dart';
+import 'package:temsah/models/vehicle.dart';
 import 'package:temsah/screens/vehicle_screen.dart';
 
 class AllVehiclesScreen extends StatefulWidget {
-  const AllVehiclesScreen({Key? key}) : super(key: key);
+  int language;
+  List<Vehicle> vehiclesList = [];
+  AllVehiclesScreen({required this.language}){
+    vehiclesList = language == LanguageEnum.english?englishVehicleList:arabicVehicleList;
+  }
 
   @override
   State<AllVehiclesScreen> createState() => _AllVehiclesScreenState();
 }
 
 class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
+
   int _focusedIndex = 0;
   void _onItemFocus(int index) {
     print(700 / MediaQuery.of(context).size.width);
@@ -41,7 +49,7 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Image(
-                  image: AssetImage(mogama3_logo),
+                  image: AssetImage(kMogama3Logo),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -56,19 +64,19 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
                       tag:'Temsah-Transition$index',
                       child: Image(
                         width: MediaQuery.of(context).size.width * 0.52,
-                        image: AssetImage(mainVehiclesPicsPathsList[index]),
+                        image: AssetImage(widget.vehiclesList[index].iconPath),
                         fit: BoxFit.contain,
                       ),
                     ),
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) =>  VehicleScreen(_focusedIndex))
+                        MaterialPageRoute(builder: (context) =>  VehicleScreen(widget.vehiclesList[index]))
                       );
                     },
                   );
                 },
-                itemCount: mainVehiclesPicsPathsList.length,
+                itemCount: widget.vehiclesList.length,
                 dynamicItemSize: true,
                 onItemFocus: _onItemFocus,
                 itemSize: MediaQuery.of(context).size.width * 0.52,
@@ -91,7 +99,7 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
                         color: Colors.white,
                       )),
                   AutoSizeText(
-                    mainVehiclesPicsPathsList[_focusedIndex],
+                    widget.vehiclesList[_focusedIndex].name,
                     style: TextStyle(color: Colors.white, fontSize: 50),
                     minFontSize: 30,
                   ),

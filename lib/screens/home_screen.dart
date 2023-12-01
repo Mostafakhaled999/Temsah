@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:temsah/screens/all_vehicles_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:temsah/assets_paths.dart';
+import 'package:temsah/enums/languageEnum.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.asset(intro_video);
+    _videoController = VideoPlayerController.asset(kIntrovideo);
 
     _videoController.addListener(() {
       setState(() {});
@@ -75,18 +76,18 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image(image: AssetImage(mogama3_logo)),
+                      Image(image: AssetImage(kMogama3Logo)),
                       Expanded(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            LanguageButton(text:'English'),
-                            LanguageButton(text:'عربى')
+                            LanguageButton(text:'English',id:LanguageEnum.english),
+                            LanguageButton(text:'عربى',id:LanguageEnum.arabic)
                           ],
                         ),
                       ),
 
-                      Image(image: AssetImage(markabat_logo)),
+                      Image(image: AssetImage(kMarkabatLogo)),
                     ],
                   ),
                 ),
@@ -174,9 +175,10 @@ class _HomeScreenState extends State<HomeScreen>
 
 class LanguageButton extends StatelessWidget {
   String text;
-
+  int id;
   LanguageButton({
-    required this.text
+    required this.text,
+    required this.id
   });
 
 @override
@@ -185,7 +187,7 @@ class LanguageButton extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AllVehiclesScreen()),
+            MaterialPageRoute(builder: (context) => AllVehiclesScreen(language: this.id)),
           );
         },
         child: AutoSizeText(

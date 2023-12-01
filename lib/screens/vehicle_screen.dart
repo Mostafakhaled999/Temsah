@@ -4,11 +4,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:temsah/assets_paths.dart';
+import 'package:temsah/models/vehicle.dart';
 
 class VehicleScreen extends StatefulWidget {
-  int vehicleIndex;
+  Vehicle vehicle;
 
-  VehicleScreen(this.vehicleIndex);
+  VehicleScreen(this.vehicle);
 
   @override
   State<VehicleScreen> createState() => _VehicleScreenState();
@@ -16,7 +17,6 @@ class VehicleScreen extends StatefulWidget {
 
 class _VehicleScreenState extends State<VehicleScreen> {
   int _focusedIndex = 0;
-
   void _onItemFocus(int index) {
     setState(() {
       _focusedIndex = index;
@@ -28,7 +28,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(mainVehiclesPicsPathsList[widget.vehicleIndex]),
+        title: Text(widget.vehicle.name),
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -39,7 +39,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Image(
-                  image: AssetImage(mogama3_logo),
+                  image: AssetImage(kMogama3Logo),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -57,18 +57,18 @@ class _VehicleScreenState extends State<VehicleScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           child: Hero(
-                            tag: 'Temsah-Transition${widget.vehicleIndex}',
+                            tag: 'Temsah-Transition${widget.vehicle.name}',
                             child: Image(
                               width: MediaQuery.of(context).size.width * 0.3,
                               image:
-                                  AssetImage(mainVehiclesPicsPathsList[index]),
+                                  AssetImage(widget.vehicle.iconPath),
                               fit: BoxFit.contain,
                             ),
                           ),
                           onTap: () {},
                         );
                       },
-                      itemCount: mainVehiclesPicsPathsList.length,
+                      itemCount: widget.vehicle.numberOfTechnicalSpecs,
                       dynamicItemSize: true,
                       onItemFocus: _onItemFocus,
                       itemSize: MediaQuery.of(context).size.width * 0.3,
@@ -83,7 +83,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
                     SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,mainAxisExtent:MediaQuery.of(context).size.height*0.9*0.3 ,crossAxisSpacing: 15,mainAxisSpacing: 15),
                     itemBuilder: (BuildContext context, int index) {
                       print( MediaQuery.of(context).size.height*0.75*0.5);
-                      return VehicleElementCard();
+                      return VehicleElementCard(widget.vehicle);
                     }),))
               ],
             ),
@@ -96,8 +96,8 @@ class _VehicleScreenState extends State<VehicleScreen> {
 }
 
 class VehicleElementCard extends StatelessWidget {
-
-
+  Vehicle vehicle;
+  VehicleElementCard(this.vehicle);
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center,
