@@ -8,6 +8,7 @@ import 'package:temsah/data/vehicles-data.dart';
 import 'package:temsah/enums/languageEnum.dart';
 import 'package:temsah/models/vehicle.dart';
 import 'package:temsah/screens/vehicle_screen.dart';
+import 'package:temsah/widgets/helper_widgets.dart';
 
 class AllVehiclesScreen extends StatefulWidget {
   int language;
@@ -55,18 +56,24 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
               ),
             ),
           ),
+
           OrientationBuilder(
             builder: (context, orientation) {
               return ScrollSnapList(
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
-                    child: Hero(
-                      tag:'Temsah-Transition$index',
-                      child: Image(
-                        width: MediaQuery.of(context).size.width * 0.52,
-                        image: AssetImage(widget.vehiclesList[index].iconPath),
-                        fit: BoxFit.contain,
-                      ),
+                    child: Column(
+                      children: [
+                        Image(
+                          width: MediaQuery.of(context).size.width * 0.52,
+                          image: AssetImage(widget.vehiclesList[index].iconPath),
+                          fit: BoxFit.contain,
+                        ),
+                        Text(
+                          widget.vehiclesList[_focusedIndex].name,
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      ],
                     ),
                     onTap: (){
                       Navigator.push(
@@ -84,39 +91,10 @@ class _AllVehiclesScreenState extends State<AllVehiclesScreen> {
               );
             },
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {},
-                      iconSize: 100,
-                      icon: Icon(
-                        Icons.keyboard_arrow_left,
-                        color: Colors.white,
-                      )),
-                  AutoSizeText(
-                    widget.vehiclesList[_focusedIndex].name,
-                    style: TextStyle(color: Colors.white, fontSize: 50),
-                    minFontSize: 30,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    iconSize: 100,
-                    icon: Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
+          BackButtons(),
         ],
       ),
     );
   }
 }
+

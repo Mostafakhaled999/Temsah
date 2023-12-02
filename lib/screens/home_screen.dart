@@ -5,6 +5,7 @@ import 'package:temsah/assets_paths.dart';
 import 'package:temsah/enums/languageEnum.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+int? languageId;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -183,19 +184,22 @@ class LanguageButton extends StatelessWidget {
 
 @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AllVehiclesScreen(language: this.id)),
-          );
-        },
-        child: AutoSizeText(
-          text,
-          style: TextStyle(fontSize: 35),
-          minFontSize: 5,
-
-          //style: TextStyle(fontSize: 40),
-        ));
+    return Container(
+      width: 200,
+      height: 60,
+      child: ElevatedButton(
+          onPressed: () {
+            languageId = this.id;
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AllVehiclesScreen(language: this.id)),
+            );
+          },
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 30),
+            //style: TextStyle(fontSize: 40),
+          )),
+    );
   }
 }
